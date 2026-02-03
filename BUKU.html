@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Forbidden Cipher</title>
+<style>
+*{
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+body{
+  margin:0;
+  background:radial-gradient(circle at center,#0b1020,#000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:#b8c7ff;
+}
+
+.panel{
+  background:linear-gradient(180deg,#141a33,#060914);
+  border:2px solid #3f4cff;
+  border-radius:18px;
+  padding:22px;
+  width:320px;
+  box-shadow:0 0 60px rgba(80,100,255,0.35);
+  text-align:center;
+}
+
+.clue{
+  font-size:24px;
+  letter-spacing:6px;
+  margin-bottom:18px;
+  color:#9aa7ff;
+}
+
+.answer{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+.box{
+  width:48px;
+  height:54px;
+  border:2px solid #3f4cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  color:#e3e7ff;
+  transition:0.3s;
+}
+
+.keyboard{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px;
+}
+.keyboard button{
+  padding:9px 0;
+  background:#0b0f25;
+  border:1px solid #2a2f66;
+  color:#cbd3ff;
+  cursor:pointer;
+}
+.keyboard button:hover{
+  background:#1a2060;
+  border-color:#5a6cff;
+}
+
+.check{
+  margin-top:14px;
+  padding:9px 28px;
+  background:#3f4cff;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+
+#story{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#050713,#000);
+  padding:50px;
+  color:#e0e3ff;
+}
+.story-box{
+  max-width:720px;
+  margin:auto;
+  line-height:1.7;
+  font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="panel">
+  <div class="clue">D34T|-|</div>
+
+  <div class="answer">
+    <div class="box" id="b0"></div>
+    <div class="box" id="b1"></div>
+    <div class="box" id="b2"></div>
+    <div class="box" id="b3"></div>
+    <div class="box" id="b4"></div>
+  </div>
+
+  <div class="keyboard" id="keyboard"></div>
+  <button class="check" onclick="check()">PERIKSA</button>
+</div>
+
+<div id="story">
+  <div class="story-box">
+    <p>“Pada masa kelam Mystic Falls, kebenaran tidak pernah benar-benar hilang.
+Ia dijaga oleh segelintir orang yang dikenal sebagai Penjaga Cahaya.
+di tengah malam, mereka menerangi jalan bagi mereka yang terpilih,
+namun membakar diri mereka sendiri demi menjaga rahasia.</p>
+    <p>Tidak ada rahasia besar yang dijaga tanpa pengorbanan.
+Dalam peristiwa yang kemudian dihapus dari sejarah resmi,
+aliran merah menjadi harga yang harus dibayar agar kota tetap berdiri.</p>
+    <p>Mereka yang mengetahui kebenaran tidak pernah tampil ke permukaan.
+Mereka disebut Para Pengawas selalu melihat,
+namun tak pernah terlihat.</p>
+    <p><i>“Kematian bukanlah akhir, melainkan awal dari pengungkapan.”</i></p>
+  </div>
+</div>
+
+<script>
+let index = 0;
+let answer = ["","","","",""];
+const correct = "DEATH";
+
+/* KEYBOARD A-Z */
+const kb = document.getElementById("keyboard");
+for(let i=65;i<=90;i++){
+  const b=document.createElement("button");
+  b.textContent=String.fromCharCode(i);
+  b.onclick=()=>input(b.textContent);
+  kb.appendChild(b);
+}
+
+function input(letter){
+  if(index<5){
+    answer[index]=letter;
+    document.getElementById("b"+index).textContent=letter;
+    index++;
+  }
+}
+
+function resetBox(){
+  index = 0;
+  answer = ["","","","",""];
+  for(let i=0;i<5;i++){
+    const box=document.getElementById("b"+i);
+    box.textContent="";
+    box.style.borderColor="#3f4cff";
+    box.style.color="#e3e7ff";
+  }
+}
+
+function check(){
+  const word = answer.join("");
+  if(word === correct){
+    document.getElementById("story").style.display="block";
+  }else{
+    for(let i=0;i<5;i++){
+      const box=document.getElementById("b"+i);
+      box.style.borderColor="#b00020";
+      box.style.color="#ff4c4c";
+    }
+    setTimeout(resetBox, 1000); // ⏳ reset setelah salah
+  }
+}
+</script>
+
+</body>
+</html>

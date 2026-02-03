@@ -1,0 +1,97 @@
+body {
+  background: #0a0a0a;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+
+h1 {
+  color: crimson;
+}
+
+.cipher {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.answer-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.box {
+  width: 50px;
+  height: 50px;
+  border: 2px solid crimson;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.keyboard button {
+  padding: 10px;
+  background: #111;
+  border: 1px solid #444;
+  color: white;
+  cursor: pointer;
+}
+
+.keyboard button:hover {
+  border-color: crimson;
+}
+
+.check {
+  margin-top: 20px;
+  padding: 10px 30px;
+  background: crimson;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* BUKU */
+#bookOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+#book {
+  font-size: 120px;
+  cursor: pointer;
+  transition: transform 0.4s;
+}
+
+#book:hover {
+  transform: scale(1.1);
+}
+
+/* CERITA */
+#storyOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  padding: 40px;
+}
+
+.story {
+  max-width: 700px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.6;
+}
